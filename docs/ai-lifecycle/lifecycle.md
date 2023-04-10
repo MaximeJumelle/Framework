@@ -7,6 +7,7 @@ sidebar_position: 1
 An AI System is not a service or a product that can be created as a single process. It evolves over time and many different actors along its lifetime.
 
 A System AI’s state depends on its lifecycle : we propose the **AI Lifecycle** which is composed of 6 stages. Each **stage** indicates an actual state of the AI System.
+Test1
 
 ## Plan & Design
 
