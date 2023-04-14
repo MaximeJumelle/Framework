@@ -8,7 +8,7 @@ In this section, we list a (*non exhaustive*) list of risks that may arise in th
 
 ## Risks of Datasets
 
-The first risk we will discuss is that of datasets. Even before creating the first model, it is important to identify and address any potential risks that may arise when analyzing or processing the dataset. This is typically performed by Data Analysts or Data Scientists responsible for creating the training sets used to build models. By carefully analyzing the dataset, these experts can identify issues such as data quality issues, data bias, or data privacy concerns. These risks must be addressed before model development begins to ensure that the resulting model is accurate, reliable, and ethical.
+The first risks we will discuss is that of datasets. Even before creating the first model, it is important to identify and address any potential risks that may arise when analyzing or processing the dataset. This is typically performed by Data Analysts or Data Scientists responsible for creating the training sets used to build models. By carefully analyzing the dataset, these experts can identify issues such as data quality issues, data bias, or data privacy concerns. These risks must be addressed before model development begins to ensure that the resulting model is accurate, reliable, and ethical.
 
 ### Bias Risk
 
@@ -44,7 +44,19 @@ Having a dataset which presents a lot of quality problems (missing values, volun
 
 ### Data Drift Risk
 
-Over time, it is possible that the features variables might not be able to explain the target variable. For example, in the fraud context, there are now new features that might help to detect what a fraud is. In a more technical way, this means that the input’s distribution changed.
+#### Definition
+
+The dataset can contain, directly or indirectly, variables with statistical properties that evolves over time. Since a model has been trained on a specific moment on the dataset, it might no longer be able to propose relevant answers, as some parts of the variables are not up-to-date. Technically, this situation occurs when the input's statistical distribution changed over time.
+
+#### Examples
+
+The first situation where data drift can occur is when the input contains at least one time variable. This situation is relatively easy to identify, as a variable would directly contain time-based values. For instance, suppose a model estimates the affluence of a grocery store, where date and time values can be considered as exogenous variables. If the model is not trained on every single day within a year, it may need frequent updates to provide accurate estimations.
+
+The other situation where data drift can occur is when some variables are directly impacted by the effect of seasonality, with time acting as a confounding factor. For example, suppose an E-commerce company wants to predict how many users will likely purchase a specific article using AI systems. Since they have a large number of users, they only process user events from the last two weeks to compute buying probabilities. Depending on the article, user behavior may be subject to seasonality effects, such as holidays, weather, or Christmas and New Year. In this situation, if the model has been trained on a dataset generated in the middle of the year, it may not be relevant now, particularly if the article is popular during Christmas. Many examples are subject to this case when a variable is impacted by a time effect : GPS is used to predict trip duration, road traffic, as well as for hire vehicles to predict the price. The housing market is also dependent on many confounding factors that evolve over time, such as inflation, global liquidity of banks, or social tendencies.
+
+#### Mitigations
+
+Usually, preventing data drift only requires **regularly updating the dataset and retraining the model**. In this situation, the dataset will be able to capture the new effects that time would have over input variables. However, even when using automated pipelines to update the model without human intervention, statistics and visualizations still need to be performed as post-building monitoring.
 
 ### Concept Drift Risk
 
@@ -62,7 +74,7 @@ Another example of concept drift that has emerged with the rise of social networ
 
 #### Mitigation
 
-To mitigate the risk of models becoming outdated due to concept drift, it is essential **to regularly update the dataset and retrain the model**. However, monitoring for concept drift requires the expertise of domain experts, as it is not a metric that can be easily measured. Concept drift refers to the shift between the dataset and the underlying phenomenon being studied, rather than a shift within the dataset itself. As such, experts can adequatly identify situations where a concept drift might occur, and ask to collect new data.
+To mitigate the risk of models becoming outdated due to concept drift, it is essential **to regularly update the dataset and retrain the model**. However, unlike data drift which can be solved without not much attention, monitoring for concept drift **requires the expertise of domain experts**, as it is not a metric that can be easily measured. Concept drift refers to the shift between the dataset and the underlying phenomenon being studied, rather than a shift within the dataset itself. As such, experts can adequatly identify situations where a concept drift might occur, and ask to collect new data.
 
 ## Risks of Models
 
